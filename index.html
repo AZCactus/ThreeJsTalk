@@ -4,13 +4,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Three.js and WebGL</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -24,8 +25,428 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Three.js and WebGL</h1>
+					<h2>Chris Uehlinger</h2>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section data-background-video="media/threejs-supercut.mp4" data-background-color="#000" data-autoslide="170000">
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Credits</h2>
+					<p>Song: <a target="_blank" href="https://soundcloud.com/cabubeats/joe-hertz-stay-lost-ft-amber-simone-cabu-remix-3">Joe Hertz - Stay Lost ft. Amber-Simone (Cabu Remix)</a></p>
+
+					<div style="display: flex; font-size:24px; justify-content: space-between;">
+						<ul>
+							<li><a target="_blank" href="http://pablotheflamingo.com/"><i>Pablo the Flamingo</i> by the World Wildlife Foundation</a></li>
+							<li><a target="_blank" href="http://oos.moxiecode.com/js_webgl/autumn/"><i>Autumn</i> by OutsideOfSociety</a></li>
+							<li><a target="_blank" href="http://vaalentin.github.io/2015/">Hello I'm V</a></li>
+							<li><a target="_blank" href="http://acko.net/files/on-webgl/whittaker/raytrace-creepy.html"><i>Creepy Raytrace</i> by Stephen Wittens</a></li>
+							<li><a target="_blank" href="http://ommexperience.com/"><i>OMM</i> by Jean Helfenstein</a></li>
+							<li><a target="_blank" href="http://armsglobe.chromeexperiments.com/">Global Arms Trade</a></li>
+							<li><a target="_blank" href="https://sirxemic.github.io/Interstellar/"><i>Interstellar</i> by sirxemic</a></li>
+							<li><a target="_blank" href="http://lightgraffiti.littlesun.com/"><i>Sunlight Graffiti</i> by Tate Modern</a></li>
+							<li><a target="_blank" href="http://acko.net/files/gltalks/pixelfactory/online.html"><i>The Pixel Factory</i> by Stephen Wittens</a></li>
+							<li><a target="_blank" href="https://threejs.org/examples/css3d_periodictable.html">3D Periodic Table (Three.js Example)</a></li>
+							<li><a target="_blank" href="https://threejs.org/examples/webgl_mirror_nodes">Mirrored Nodes (Three.js Example)</a></li>
+							<li><a target="_blank" href="http://arodic.github.io/p/jellyfish/"><i>Jellyfish</i> by Aleksander Rodic</a></li>
+							<li><a target="_blank" href="http://kenji-special.tv/special"><i>How To Make Snow</i> by Kenji Saito</a></li>
+							
+						</ul>
+						<ul><li><a target="_blank" href="http://www.nytimes.com/interactive/2015/01/09/sports/the-dawn-wall-el-capitan.html"><i>The Dawn Wall</i> by The New York Times</a></li>
+							<li><a target="_blank" href="http://cabbi.bo/enough/"><i>Enough</i> by Cabbibo</a></li>
+							<li><a target="_blank" href="http://news-lab-trends-experiment.appspot.com/"><i>A World of Change</i> by Google Trends</a></li>
+							<li><a target="_blank" href="http://www.dilladimension.com/">The Dilla Dimension</a></li>
+							<li><a target="_blank" href="http://www.ro.me/"><i>Rome</i> by Chris Milk</a></li>
+							<li><a target="_blank" href="http://lights.helloenjoy.com/">Ellie Goulding's <i>Lights</i>, Interactive by HelloEnjoy</a></li>
+							<li><a target="_blank" href="https://threejs.org/examples/webgl_materials_video">Materials / Video (Three.js Example)</a></li>
+							<li><a target="_blank" href="http://www.sbs.com.au/theboat/"><i>The Boat</i> by SBS</a></li>
+							<li><a target="_blank" href="http://acko.net/"><i>Acko.net</i> by Stephen Wittens</a></li>
+							<li><a target="_blank" href="http://wikiverse.io/">Wikiverse</a></li>
+							<li><a target="_blank" href="http://www.simonreeves.com/projects/db5/"><i>DB5</i> by Simon Reeves</a></li>
+							<li><a target="_blank" href="http://www.fallen.io/ww2/"><i>The Fallen of WW2</i> by Neil Halloran</a></li>
+							<li><a target="_blank" href="https://threejs.org/examples/webgl_modifier_tessellation">WebGL Tesselation Modifier (Three.js Example)</a></li>
+						</ul>
+					</div>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						Outline
+						=======
+
+						- A summary of 3D web technologies:
+							- WebGL
+							- Three.js
+						- A tutorial on making a basic scene
+						- Ways to learn more about Three.js and 3D graphics
+					</script>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>What is WebGL?</h2>
+
+					<ul>
+						<li class="fragment fade-in">An HTML5 JavaScript API for drawing things on an HTML5 <code>&lt;canvas&gt;</code> element</li>
+						<li class="fragment fade-in">A low level graphics API based on OpenGL (A C graphics library)</li>
+						<li class="fragment fade-in">Kind of a pain in the butt tbqh</li>
+					</ul>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>TRIANGLES!</h2>
+					<video class="stretch" data-autoplay data-src="media/TRIANGLES!.mp4" type="video/mp4"></video>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="examples/triangles.html"></iframe>
+					<div class="nothanks fragment">NO THANKS</div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<iframe class="stretch" data-src="https://codepen.io/kenjiSpecial/pen/vELOrM"></iframe>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>What is Three.js?</h2>
+
+					<ul>
+						<li class="fragment fade-in">A library that lets you think about 3D graphics at a higher level</li>
+						<li class="fragment fade-in">A library that uses WebGL under the hood</li>
+						<li class="fragment fade-in">Awesome</li>
+					</ul>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Our First Scene</h2>
+					<iframe class="stretch" data-src="examples/cube.html"></iframe>
+					<a href="https://threejs.org/docs/index.html#Manual/Introduction/Creating_a_scene">
+						Based on the "Creating a Scene" Tutorial on threejs.org
+					</a>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>The Scene Graph</h2>
+					<img class="stretch" src="images/scenegraph.png" />
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Boilerplate</h2>
+					<pre class="stretch"><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My first Three.js app&lt;/title&gt;
+        &lt;style&gt;
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/r82/three.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            // OUR CODE WILL GO HERE
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Geometry</h2>
+					<p>Geometry = Shape</p>
+					<pre><code class="js">var geometry = new THREE.BoxGeometry(1, 1, 1);</code></pre>
+
+					<iframe data-src="examples/cube-wireframe.html" width="150" height="150"></iframe>
+
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Material</h2>
+					<pre><code class="js">var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });</code></pre>
+					<div class="green-swatch"></div>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Mesh</h2>
+					<p>Mesh = Thing</p>
+					<pre><code class="js">var cube = new THREE.Mesh(geometry, material);</code></pre>
+					<div class="fragment fade-in mesh-equation">
+						<iframe data-src="examples/cube-wireframe.html" width="150" height="150"></iframe>
+						<div style="font-size: 72px">+</div>
+						<div class="green-swatch"></div>
+						<div style="font-size: 72px">=</div>
+						<iframe data-src="examples/cube.html" width="150" height="150"></iframe>
+					</div>
+					<pre class="fragment fade-in"><code class="js">cube.position.x = 0;
+cube.position.y = 0;
+cube.position.z = 0;
+
+cube.rotation.x = 0;
+cube.rotation.y = 0;
+cube.rotation.z = 0;</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Scene</h2>
+					<p>Scene = The World = A list of meshes</p>
+					<pre><code class="js">var scene = new THREE.Scene();
+scene.add(cube);</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Camera</h2>
+					<p>Camera = Your Eyes</p>
+					<pre><code class="js" style="overflow: hidden;">var aspectRatio = window.innerWidth/window.innerHeight;
+var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+camera.position.z = 2;</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Renderer</h2>
+					<p>Renderer = How you draw on the canvas</p>
+					<pre><code class="js">var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+var canvas = renderer.domElement;
+document.body.appendChild(canvas);</code></pre>
+					<pre class="fragment fade-in"><code class="js">renderer.render(scene, camera);</code></pre>
+					
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Let's look at our Scene!</h2>
+					<iframe class="stretch" data-src="examples/cube-static.html"></iframe>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Render Loop</h2>
+					<pre><code class="js">function render() {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+}
+
+render();</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>LOOKIT!</h2>
+                    <iframe class="stretch" data-src="examples/cube.html"></iframe>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Texture</h2>
+					<pre><code class="js">var texture = new THREE.TextureLoader().load('textures/crate.gif');
+var material = new THREE.MeshBasicMaterial({ map: texture });</code></pre>
+					<img class="green-swatch" data-src="examples/textures/crate.gif" alt="" />
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Nice!</h2>
+                    <iframe class="stretch" data-src="examples/cube-texture.html"></iframe>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>The Scene Graph</h2>
+					<img class="stretch" src="images/scenegraph.png" />
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Three.JS Examples</h2>
+					<p>Let's learn two last things:</p>
+					<ul>
+						<li>Controls</li>
+						<li>Effects</li>
+					</ul>
+					<div>
+						<a href="https://threejs.org/examples" target="_blank">To the Examples Page!</a>
+					</div>
+					</script>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Controls</h2>
+					<div>
+						<a href="https://threejs.org/examples/#misc_controls_orbit" target="_blank">An Example</a>
+					</div>
+					<p>These aren't included in Three.js, they are plugins contained in separate JS files</p>
+					<pre class="fragment fade-in"><code class="html">&lt;script src="OrbitControls.js"&gt;&lt;/script&gt;</code></pre>
+					<pre class="fragment fade-in"><code class="js">var controls = new THREE.OrbitControls(camera, canvas);</code></pre>
+					<pre class="fragment fade-in"><code class="js">function render() {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    controls.update();
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+}
+
+render();</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Click and Drag the mouse</h2>
+                    <iframe class="stretch" data-src="examples/cube-controls.html"></iframe>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Effects</h2>
+					<div>
+						<a href="https://threejs.org/examples/#webgl_effects_stereo" target="_blank">An Example</a>
+					</div>
+					<p>These are also plugins.</p>
+					<pre class="fragment fade-in"><code class="html">&lt;script src="StereoEffect.js"&gt;&lt;/script&gt;</code></pre>
+					<pre class="fragment fade-in"><code class="js">var renderer = new THREE.WebGLRenderer();
+var canvas = renderer.domElement;
+document.body.appendChild(canvas);
+
+var effect = new THREE.StereoEffect( renderer );
+effect.setSize(window.innerWidth, window.innerHeight);</code></pre>
+					<pre class="fragment fade-in"><code class="js">function render() {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    controls.update();
+
+    effect.render(scene, camera);
+
+    requestAnimationFrame(render);
+}
+
+render();</code></pre>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Virtual Reality</h2>
+                    <iframe class="stretch" data-src="examples/cube-vr.html"></iframe>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
+				<section>
+					<h2>Thanks for Watching!</h2>
+					<ul>
+						<li>
+							<a href="https://classroom.udacity.com/courses/cs291" target="_blank">Udacity's Interactive Graphics Course</a>
+							- A great top-to-bottom course on 3D graphics (uses Three.js)
+						</li>
+						<li>
+							<a href="https://thebookofshaders.com/" target="_blank">The Book of Shaders</a>
+							- Interactive lessons about a fascinating topic
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw" target="_blank">3 Brown 1 Blue</a>
+							 - A great resource for learning Linear Algebra
+						</li>
+						<li>
+							<a href="http://tympanus.net/codrops/2016/04/26/the-aviator-animating-basic-3d-scene-threejs/" target="_blank">The Aviator</a>
+							- A Tutorial about making a basic 3D game
+						</li>
+						<li>This git repository: <a href="htt" target="_blank">
+					</ul>
+					<aside class="notes" data-markdown>
+						<script type="text/template">
+						</script>
+					</aside>
+				</section>
 			</div>
 		</div>
 
@@ -36,6 +457,8 @@
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+				progress: false,
+				controls: false,
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
